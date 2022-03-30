@@ -36,6 +36,7 @@ func dirwalk(dir string) []string {
 
 func textExtruct(format string, img string, path string, lang string) {
 	if strings.Contains(format, img) {
+		fmt.Println(path)
 		cmd := exec.Command("tesseract", path, path, "-l", lang)
 		err := cmd.Run()
 		if err != nil {
@@ -63,7 +64,6 @@ func main() {
 	imgs := [...]string{"jpeg", "jpg", "bmp", "png", "gif"}
 
 	for _, path := range paths {
-		fmt.Println(path)
 		f, _ := os.Open(path)
 		defer f.Close()
 

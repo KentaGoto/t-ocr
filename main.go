@@ -46,7 +46,7 @@ func textExtruct(format string, img string, path string, lang string) {
 	}
 }
 
-// Supported image types: jpeg, bmp, png, gif,
+// Supported image types: jpeg, bmp, png, gif
 func main() {
 	var arg string
 	if len(os.Args) != 3 {
@@ -56,7 +56,7 @@ func main() {
 		arg = os.Args[1]
 	}
 
-	lang := os.Args[2]
+	lang := os.Args[2] // Tesseract language specification options.
 
 	paths := dirwalk(arg)
 	fmt.Println("Processing...")
@@ -67,7 +67,7 @@ func main() {
 		f, _ := os.Open(path)
 		defer f.Close()
 
-		_, format, err := image.DecodeConfig(f) // Get the image file format
+		_, format, err := image.DecodeConfig(f) // Get the image file format.
 		if err != nil {
 			fmt.Println(err)
 		}

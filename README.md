@@ -7,7 +7,8 @@ The tesseract command must be executable.
 ```
 $ go run main.go <DIR> <LANG>
 ```
-\* Specify the Lang Code of tesseract.
+\* Specify the Lang Code of tesseract.  
+https://tesseract-ocr.github.io/tessdoc/Data-Files
 
 ## License
 MIT

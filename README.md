@@ -1,6 +1,6 @@
 # t-ocr
 
-## Requires
+## Description
 The tesseract command must be executable.
 
 ## How to use

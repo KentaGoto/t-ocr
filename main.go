@@ -34,7 +34,7 @@ func dirwalk(dir string) []string {
 	return paths
 }
 
-func imgCheck(format string, img string, path string, lang string) {
+func textExtruct(format string, img string, path string, lang string) {
 	if strings.Contains(format, img) {
 		cmd := exec.Command("tesseract", path, path, "-l", lang)
 		err := cmd.Run()
@@ -46,7 +46,7 @@ func imgCheck(format string, img string, path string, lang string) {
 	}
 }
 
-// Supported image types: gif, jpeg, png, bmp
+// Supported image types: jpeg, bmp, png, gif,
 func main() {
 	var arg string
 	if len(os.Args) != 3 {
@@ -73,7 +73,9 @@ func main() {
 		}
 
 		for _, img := range imgs {
-			imgCheck(format, img, path, lang)
+			textExtruct(format, img, path, lang)
 		}
 	}
+
+	fmt.Println("Done!")
 }

@@ -11,6 +11,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
+	"sync"
 
 	_ "golang.org/x/image/bmp"
 	_ "golang.org/x/image/tiff"
@@ -47,6 +48,34 @@ func ocr(format string, img string, path string, lang string) {
 	}
 }
 
+func runCommand(arg string, lang string) {
+	paths := dirwalk(arg)
+	fmt.Println("Processing...")
+	imgs := [...]string{"jpeg", "jpg", "bmp", "png", "gif"}
+
+	wg := &sync.WaitGroup{}
+
+	for _, path := range paths {
+		wg.Add(1)
+		go func(path string) {
+			defer wg.Done()
+
+			f, _ := os.Open(path)
+			defer f.Close()
+
+			_, format, err := image.DecodeConfig(f) // Get the image file format.
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			for _, img := range imgs {
+				ocr(format, img, path, lang)
+			}
+		}(path)
+	}
+	wg.Wait()
+}
+
 // Supported image types: jpeg, bmp, png, gif
 func main() {
 	var arg string
@@ -59,23 +88,7 @@ func main() {
 
 	lang := os.Args[2] // Tesseract language specification options.
 
-	paths := dirwalk(arg)
-	fmt.Println("Processing...")
-	imgs := [...]string{"jpeg", "jpg", "bmp", "png", "gif"}
-
-	for _, path := range paths {
-		f, _ := os.Open(path)
-		defer f.Close()
-
-		_, format, err := image.DecodeConfig(f) // Get the image file format.
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		for _, img := range imgs {
-			ocr(format, img, path, lang)
-		}
-	}
+	runCommand(arg, lang)
 
 	fmt.Println("Done!")
 }

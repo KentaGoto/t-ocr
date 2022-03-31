@@ -48,8 +48,8 @@ func ocr(format string, img string, path string, lang string) {
 	}
 }
 
-func runCommand(arg string, lang string) {
-	paths := dirwalk(arg)
+func runCommand(dir string, lang string) {
+	paths := dirwalk(dir)
 	fmt.Println("Processing...")
 	imgs := [...]string{"jpeg", "jpg", "bmp", "png", "gif"}
 
@@ -78,17 +78,16 @@ func runCommand(arg string, lang string) {
 
 // Supported image types: jpeg, bmp, png, gif
 func main() {
-	var arg string
+	var dir string
+
 	if len(os.Args) != 3 {
 		fmt.Println("The number of arguments specified is incorrect.")
 		os.Exit(1)
 	} else {
-		arg = os.Args[1]
+		dir = os.Args[1]
 	}
 
 	lang := os.Args[2] // Tesseract language specification options.
-
-	runCommand(arg, lang)
-
-	fmt.Println("Done!")
+	runCommand(dir, lang)
+	fmt.Println("\nDone!")
 }

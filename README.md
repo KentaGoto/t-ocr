@@ -9,7 +9,7 @@ $ go run main.go <DIR> <LANG>
 ```
 
 ### Note
-Example of language specification
+Example of Lang Code specification
 - jpn
 - eng
 

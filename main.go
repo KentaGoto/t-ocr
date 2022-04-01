@@ -84,7 +84,7 @@ func main() {
 		dir = os.Args[1]
 		if dir == "-h" || dir == "--help" {
 			fmt.Println(`USAGE
-  $ go run main.go <DIR> <LANG>`)
+  $ go run main.go <Dir> <Lang Code>`)
 			os.Exit(1)
 		}
 	}

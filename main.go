@@ -80,6 +80,15 @@ func runCommand(dir string, lang string) {
 func main() {
 	var dir string
 
+	if len(os.Args) == 2 {
+		dir = os.Args[1]
+		if dir == "-h" || dir == "--help" {
+			fmt.Println(`USAGE
+  $ go run main.go <DIR> <LANG>`)
+			os.Exit(1)
+		}
+	}
+
 	if len(os.Args) != 3 {
 		fmt.Println("The number of arguments specified is incorrect.")
 		os.Exit(1)

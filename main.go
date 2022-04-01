@@ -79,6 +79,7 @@ func runCommand(dir string, lang string) {
 // Supported image types: jpeg, bmp, png, gif
 func main() {
 	var dir string
+	var lang string
 
 	if len(os.Args) == 2 {
 		dir = os.Args[1]
@@ -94,9 +95,9 @@ func main() {
 		os.Exit(1)
 	} else {
 		dir = os.Args[1]
+		lang = os.Args[2] // Tesseract language specification options.
 	}
 
-	lang := os.Args[2] // Tesseract language specification options.
 	runCommand(dir, lang)
 	fmt.Println("\nDone!")
 }

@@ -5,7 +5,7 @@ The tesseract command must be executable.
 
 ## How to use
 ```
-$ go run main.go <DIR> <LANG>
+$ go run main.go <Dir> <Lang Code>
 ```
 
 ### Note
